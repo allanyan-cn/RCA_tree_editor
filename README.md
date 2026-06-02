@@ -69,3 +69,5 @@ npm install
 2. 使用编辑器工具创建、编辑或删除节点
 3. 调整节点位置和关系
 4. 导出数据为 JSON 文件
+
+![screen](public/data/screen.png)
