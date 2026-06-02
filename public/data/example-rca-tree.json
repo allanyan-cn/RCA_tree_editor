@@ -1,0 +1,102 @@
+[
+  {
+    "node_id": "1f59d172-978f-4e63-827a-d2c2d9e3197a",
+    "node_name": "全行总利润",
+    "business_code": "TOTAL_PROFIT",
+    "parent_id": null,
+    "node_type": "DIRECT",
+    "calculation_rule": "+",
+    "meta_data": {
+      "table_name": "",
+      "field_name": "",
+      "time_field": "",
+      "time_grain": "DAILY",
+      "join_keys": "",
+      "extra_conditions": ""
+    },
+    "business_context": {
+      "impact_description": "衡量全行业务经营结果的核心指标",
+      "metric_unit": "万元",
+      "drift_threshold": {
+        "mom_threshold": "0.05",
+        "yoy_threshold": "0.08",
+        "trigger_logic": "OR"
+      }
+    }
+  },
+  {
+    "node_id": "0e594420-5b5e-465f-83c1-2cbc9e8b8750",
+    "node_name": "营业收入",
+    "business_code": "OPERATING_REVENUE",
+    "parent_id": "1f59d172-978f-4e63-827a-d2c2d9e3197a",
+    "node_type": "DIRECT",
+    "calculation_rule": "+",
+    "meta_data": {
+      "table_name": "ads_finance_profit_daily",
+      "field_name": "SUM(operating_revenue)",
+      "time_field": "stat_date",
+      "time_grain": "DAILY",
+      "join_keys": "bank_code, branch_code",
+      "extra_conditions": "currency_code = 'CNY'"
+    },
+    "business_context": {
+      "impact_description": "",
+      "metric_unit": "",
+      "drift_threshold": {
+        "mom_threshold": "0.05",
+        "yoy_threshold": "0.05",
+        "trigger_logic": "OR"
+      }
+    }
+  },
+  {
+    "node_id": "718351dc-3ab8-48a9-8951-df9eac8d51e5",
+    "node_name": "营业成本",
+    "business_code": "OPERATING_COST",
+    "parent_id": "1f59d172-978f-4e63-827a-d2c2d9e3197a",
+    "node_type": "DIRECT",
+    "calculation_rule": "-",
+    "meta_data": {
+      "table_name": "",
+      "field_name": "",
+      "time_field": "",
+      "time_grain": "DAILY",
+      "join_keys": "",
+      "extra_conditions": ""
+    },
+    "business_context": {
+      "impact_description": "",
+      "metric_unit": "",
+      "drift_threshold": {
+        "mom_threshold": "0.05",
+        "yoy_threshold": "0.05",
+        "trigger_logic": "OR"
+      }
+    }
+  },
+  {
+    "node_id": "38cf9316-7b29-4f08-9be7-9f76b401efc5",
+    "node_name": "App 活跃用户数",
+    "business_code": "APP_ACTIVE_USERS",
+    "parent_id": "0e594420-5b5e-465f-83c1-2cbc9e8b8750",
+    "node_type": "INDIRECT",
+    "calculation_rule": "Positive",
+    "meta_data": {
+      "table_name": "",
+      "field_name": "",
+      "time_field": "",
+      "time_grain": "DAILY",
+      "join_keys": "",
+      "extra_conditions": ""
+    },
+    "business_context": {
+      "impact_description": "活跃用户增长通常会带动线上产品销售额提升",
+      "metric_unit": "人",
+      "drift_threshold": {
+        "mom_threshold": "0.1",
+        "yoy_threshold": "0.15",
+        "trigger_logic": "OR"
+      }
+    }
+  }
+]
